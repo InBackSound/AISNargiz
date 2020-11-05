@@ -1,0 +1,216 @@
+[
+  {
+    "keyword": "Feature",
+    "name": "I am going to generate text",
+    "line": 1,
+    "id": "i-am-going-to-generate-text",
+    "tags": [],
+    "uri": "features/generatetext.feature",
+    "elements": [
+      {
+        "id": "i-am-going-to-generate-text;entering-parameters-and-generating-text",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Entering parameters and generating text",
+        "tags": [
+          {
+            "name": "@GeneratorTesting",
+            "line": 3
+          }
+        ],
+        "type": "scenario",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "match": {
+              "location": "JSFiles/stepDefinitions/hooks.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "User navigates to \"textgenerator\" site",
+            "match": {
+              "location": "JSFiles/stepDefinitions/generator.steps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1928000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 7,
+            "name": "User selects english language in text variants",
+            "match": {
+              "location": "JSFiles/stepDefinitions/generator.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 266000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "User sets number of paragraph are \"1\"",
+            "match": {
+              "location": "JSFiles/stepDefinitions/generator.steps.js:32"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 104000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "User sets min number of symbols are \"130\"",
+            "match": {
+              "location": "JSFiles/stepDefinitions/generator.steps.js:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 108000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "User sets max number of symbols are \"150\"",
+            "match": {
+              "location": "JSFiles/stepDefinitions/generator.steps.js:40"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 94000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "User sets symbols before paragraph are \"<p>\"",
+            "match": {
+              "location": "JSFiles/stepDefinitions/generator.steps.js:44"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 59000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "User sets symbols after paragraph are \"/<p>\"",
+            "match": {
+              "location": "JSFiles/stepDefinitions/generator.steps.js:47"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 70000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "User sets convert everything to uppercase checkbox to \"false\"",
+            "match": {
+              "location": "JSFiles/stepDefinitions/generator.steps.js:50"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "User sets strict regime checkbox to \"false\"",
+            "match": {
+              "location": "JSFiles/stepDefinitions/generator.steps.js:64"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 20000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "User clicks generate button",
+            "match": {
+              "location": "JSFiles/stepDefinitions/generator.steps.js:77"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 48000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "text was generated",
+            "match": {
+              "location": "JSFiles/stepDefinitions/generator.steps.js:80"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 21000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "number of symbols should be between \"130\" and \"150\"",
+            "match": {
+              "location": "JSFiles/stepDefinitions/generator.steps.js:83"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2020000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "JSFiles/stepDefinitions/hooks.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "node_modules/protractor-cucumber-framework/lib/resultsCapturer.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4000000
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
