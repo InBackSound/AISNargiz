@@ -14,13 +14,10 @@ const protractor_1 = require("protractor");
 cucumber_1.Before(function () {
     // This hook will be executed before all scenarios
 });
-cucumber_1.Before({ tags: "@CalculatorTesting" }, function () {
+cucumber_1.Before({ tags: "@GeneratorTesting" }, function () {
     protractor_1.browser.manage().window().maximize();
 });
-cucumber_1.Before({ tags: "@AngularTesting or @CalculatorTesting" }, function () {
-    console.log(`I need to execute it first`);
-});
-cucumber_1.After({ tags: "@CalculatorTesting" }, function () {
+cucumber_1.After({ tags: "@GeneratorTesting" }, function () {
     console.log(`Test is finished`);
 });
 cucumber_1.After(function (scenario) {
@@ -30,5 +27,9 @@ cucumber_1.After(function (scenario) {
             const screenshot = yield protractor_1.browser.takeScreenshot();
             this.attach(screenshot, "image/png");
         }
+        ;
+        yield protractor_1.browser.executeScript('window.localStorage.clear();');
+        yield protractor_1.browser.executeScript('window.sessionStorage.clear();');
+        yield protractor_1.browser.driver.manage().deleteAllCookies();
     });
 });

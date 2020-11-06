@@ -5,15 +5,11 @@ Before(function () {
   // This hook will be executed before all scenarios
 });
 
-Before({tags: "@CalculatorTesting"}, function () {
+Before({tags: "@GeneratorTesting"}, function () {
   browser.manage().window().maximize();
 });
 
-Before({tags: "@AngularTesting or @CalculatorTesting"}, function () {
-  console.log(`I need to execute it first`);
-});
-
-After({tags: "@CalculatorTesting"}, function () {
+After({tags: "@GeneratorTesting"}, function () {
     console.log(`Test is finished`);
   });
 
@@ -23,5 +19,8 @@ After({tags: "@CalculatorTesting"}, function () {
         //code to take screenshot
         const screenshot = await browser.takeScreenshot();
         this.attach(screenshot,"image/png");
-    }
+    };
+    await browser.executeScript('window.localStorage.clear();');
+    await browser.executeScript('window.sessionStorage.clear();');
+    await browser.driver.manage().deleteAllCookies();  
   });
