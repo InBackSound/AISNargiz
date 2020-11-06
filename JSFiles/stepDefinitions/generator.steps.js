@@ -87,7 +87,7 @@ cucumber_1.Then(/^number of symbols should be between "(.*?)" and "(.*?)"$/, (mi
     yield protractor_1.browser.sleep(2000);
 }));
 function calcLenght(minvalue, maxvalue, resultvalue) {
-    if (Number(minvalue) <= Number(resultvalue) && Number(maxvalue) >= Number(resultvalue)) {
+    if (Number(minvalue) <= Number(resultvalue) && Number(maxvalue) >= Number(resultvalue)) { //вариант решения -  split, в массив 3 числа и в цикл сравнивтаь - прогонять по пор. номеру элемента массива
         console.log("Количество знаков верно: " + resultvalue);
         return "correctresultvalue";
     }

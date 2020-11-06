@@ -80,8 +80,8 @@ Then (/^number of symbols should be between "(.*?)" and "(.*?)"$/, async(minvalu
     await browser.sleep(2000);
 });
 
-function calcLenght(minvalue: string, maxvalue: string, resultvalue:number): any {
-    if (Number(minvalue) <= Number(resultvalue)  &&  Number(maxvalue) >= Number(resultvalue)){
+function calcLenght(minvalue: string, maxvalue: string, resultvalue:number): any {// работает, только если параметр - 1 абзац. иначе неверно, тк программа генерит кол-во символов в абзаце
+    if (Number(minvalue) <= Number(resultvalue)  &&  Number(maxvalue) >= Number(resultvalue)){  //вариант решения -  split, в массив 3 числа и в цикл сравнивтаь - прогонять по пор. номеру элемента массива
         console.log("Количество знаков верно: "+resultvalue)
         return "correctresultvalue"
     }

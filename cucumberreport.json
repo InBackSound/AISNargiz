@@ -27,8 +27,7 @@
               "location": "JSFiles/stepDefinitions/hooks.js:14"
             },
             "result": {
-              "status": "passed",
-              "duration": 1000000
+              "status": "passed"
             }
           },
           {
@@ -41,7 +40,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 1928000000
+              "duration": 1722000000
             }
           },
           {
@@ -54,7 +53,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 266000000
+              "duration": 746000000
             }
           },
           {
@@ -67,27 +66,27 @@
             },
             "result": {
               "status": "passed",
-              "duration": 104000000
+              "duration": 113000000
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 9,
-            "name": "User sets min number of symbols are \"130\"",
+            "name": "User sets min number of symbols are \"50\"",
             "match": {
               "location": "JSFiles/stepDefinitions/generator.steps.js:36"
             },
             "result": {
               "status": "passed",
-              "duration": 108000000
+              "duration": 93000000
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 10,
-            "name": "User sets max number of symbols are \"150\"",
+            "name": "User sets max number of symbols are \"100\"",
             "match": {
               "location": "JSFiles/stepDefinitions/generator.steps.js:40"
             },
@@ -106,7 +105,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 59000000
+              "duration": 77000000
             }
           },
           {
@@ -119,7 +118,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 70000000
+              "duration": 96000000
             }
           },
           {
@@ -132,20 +131,20 @@
             },
             "result": {
               "status": "passed",
-              "duration": 24000000
+              "duration": 25000000
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 14,
-            "name": "User sets strict regime checkbox to \"false\"",
+            "name": "User sets strict regime checkbox to \"true\"",
             "match": {
               "location": "JSFiles/stepDefinitions/generator.steps.js:64"
             },
             "result": {
               "status": "passed",
-              "duration": 20000000
+              "duration": 70000000
             }
           },
           {
@@ -158,7 +157,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 48000000
+              "duration": 46000000
             }
           },
           {
@@ -178,13 +177,13 @@
             "arguments": [],
             "keyword": "And ",
             "line": 17,
-            "name": "number of symbols should be between \"130\" and \"150\"",
+            "name": "number of symbols should be between \"50\" and \"100\"",
             "match": {
               "location": "JSFiles/stepDefinitions/generator.steps.js:83"
             },
             "result": {
               "status": "passed",
-              "duration": 2020000000
+              "duration": 2023000000
             }
           },
           {
@@ -195,7 +194,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 1000000
+              "duration": 3000000
             }
           },
           {
@@ -206,7 +205,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 4000000
+              "duration": 6000000
             }
           }
         ]
