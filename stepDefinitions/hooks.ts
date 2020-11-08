@@ -20,6 +20,7 @@ After({tags: "@GeneratorTesting"}, function () {
         const screenshot = await browser.takeScreenshot();
         this.attach(screenshot,"image/png");
     };
+    await browser.sleep(1000);  //полюбоваься результатом
     await browser.executeScript('window.localStorage.clear();');
     await browser.executeScript('window.sessionStorage.clear();');
     await browser.driver.manage().deleteAllCookies();  

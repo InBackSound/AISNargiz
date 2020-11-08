@@ -20,6 +20,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.config = void 0;
+const protractor_1 = require("protractor");
 //import { inherits } from "util";
 const reporter = __importStar(require("cucumber-html-reporter")); //import everything (на всяк случай), писать будем "reporter"
 //var reporter = require('cucumber-html-reporter');
@@ -31,6 +32,10 @@ exports.config = {
     chromeDriver: '../node_modules/protractor/node_modules/webdriver-manager/selenium/chromedriver_85.0.4183.87',
     framework: 'custom',
     frameworkPath: require.resolve('protractor-cucumber-framework'),
+    params: {
+        defaultTimeout: 60000,
+        generatorPageURL: "https://service.webboss.pro/text-generator"
+    },
     // Capabilities to be passed to the webdriver instance.
     capabilities: {
         browserName: 'chrome'
@@ -39,6 +44,10 @@ exports.config = {
     // to protractor (in this example conf.js).
     // They may include glob patterns.
     specs: ['../features/generatetext.feature'],
+    onPrepare: () => {
+        protractor_1.browser.waitForAngularEnabled(false);
+        protractor_1.browser.ignoreSynchronization = true;
+    },
     onComplete: function () {
         console.log('onComplete');
         var options = {

@@ -28,6 +28,7 @@ cucumber_1.After(function (scenario) {
             this.attach(screenshot, "image/png");
         }
         ;
+        yield protractor_1.browser.sleep(1000); //полюбоваься результатом
         yield protractor_1.browser.executeScript('window.localStorage.clear();');
         yield protractor_1.browser.executeScript('window.sessionStorage.clear();');
         yield protractor_1.browser.driver.manage().deleteAllCookies();

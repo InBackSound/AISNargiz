@@ -18,81 +18,165 @@ const chai_1 = __importDefault(require("chai"));
 var expect = chai_1.default.expect;
 const textGeneratorPage_1 = require("../PageObjects/textGeneratorPage");
 let textgen = new textGeneratorPage_1.textGeneratorPage();
-cucumber_1.Given(/^User navigates to "(.*?)" site$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
-    if (string == "textgenerator") {
-        protractor_1.browser.waitForAngularEnabled(false); //https://github.com/angular/protractor/blob/master/docs/timeouts.md#waiting-for-angular-on-page-load
-        yield protractor_1.browser.get('https://service.webboss.pro/text-generator');
-    }
+cucumber_1.Given(/^User navigates to Text Generator site$/, () => __awaiter(void 0, void 0, void 0, function* () {
+    // browser.waitForAngularEnabled(false);  перенесла в cucumberconfig
+    yield protractor_1.browser.navigate().to(protractor_1.browser.params.generatorPageURL);
+    yield textgen.Loaded();
 }));
-cucumber_1.When(/^User selects english language in text variants$/, () => __awaiter(void 0, void 0, void 0, function* () {
-    yield textgen.textVariantsList.click(); //костыль родимый
-    yield textgen.textVariantsList.sendKeys(protractor_1.protractor.Key.ARROW_DOWN);
-    yield textgen.textVariantsList.sendKeys(protractor_1.protractor.Key.ENTER);
+cucumber_1.When(/^User selects "(.*?)" in text variant field$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
+    yield textgen.chooseTextVariant(string);
 }));
-cucumber_1.When(/^User sets number of paragraph are "(.*?)"$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
-    yield textgen.paragrNumber.clear();
-    yield textgen.paragrNumber.sendKeys(string);
+cucumber_1.When(/^User sets number of paragraphs: "(.*?)"$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
+    yield textgen.enterNumberOfPharagr(string);
 }));
-cucumber_1.When(/^User sets min number of symbols are "(.*?)"$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
-    yield textgen.minSymbols.clear();
-    yield textgen.minSymbols.sendKeys(string);
+cucumber_1.When(/^User sets min number of symbols in each paragraph: "(.*?)"$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
+    yield textgen.enterMinSymbols(string);
 }));
-cucumber_1.When(/^User sets max number of symbols are "(.*?)"$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
-    yield textgen.maxSymbols.clear();
-    yield textgen.maxSymbols.sendKeys(string);
+cucumber_1.When(/^User sets max number of symbols in each paragraph: "(.*?)"$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
+    yield textgen.enterMaxSymbols(string);
 }));
-cucumber_1.When(/^User sets symbols before paragraph are "(.*?)"$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
-    yield textgen.symbolBeforeText.sendKeys(string);
+cucumber_1.When(/^User sets symbols before paragraph: "(.*?)"$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
+    yield textgen.entersymbolBeforeText(string);
 }));
-cucumber_1.When(/^User sets symbols after paragraph are "(.*?)"$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
-    yield textgen.symbolAfterText.sendKeys(string);
+cucumber_1.When(/^User sets symbols after paragraph: "(.*?)"$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
+    yield textgen.entersymbolAfterText(string);
 }));
-cucumber_1.When(/^User sets convert everything to uppercase checkbox to "(.*?)"$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
-    if (string == "true") { //true тут - текст в сценарии
-        yield textgen.uppercaseCheckBox.click();
-        yield textgen.uppercaseCheckBox.getAttribute('checked').then((clickerornot) => {
-            expect(clickerornot).to.equal('true'); //true тут - приходящее value из кода сайта
-        });
-    }
-    else if (string == "false") { //м вообще удалить часть кода
-        yield textgen.uppercaseCheckBox.getAttribute('checked').then((clickerornot) => {
-            console.log(`Позиция верхнего регистра: ${clickerornot}`);
-            //expect(clickerornot).to.equal('true'); //если раскоментить (или вообще без if), при некликнутом чекбоксе тест будет падать
-        });
-    }
+cucumber_1.When(/^User sets uppercase checkbox on "(.*?)"$/, (clickornot) => __awaiter(void 0, void 0, void 0, function* () {
+    yield textgen.FindoutStatusUppercaseCheckBox().then((currentstatus) => __awaiter(void 0, void 0, void 0, function* () {
+        yield console.log(`надо кликнуть?: ${clickornot}`);
+        yield console.log(`currentstatus: ${currentstatus}`);
+        //попытка4
+        let result = (yield clickornot) + currentstatus;
+        console.log('result: ' + result);
+        if (result === "truenull") {
+            yield console.log(`clickornot = true, currentstatus = null`);
+            yield textgen.clickUppercaseCheckBox(); //если не прожато, но долно быть прожато
+            yield console.log('если не прожато, но долно быть прожато - жму');
+            yield protractor_1.browser.sleep(1000); //чтобы посмотреть, прожалось ли
+        }
+        else if (result === "truetrue") {
+            yield console.log(`clickornot = true, currentstatus = true`);
+            //await console.log("");
+            yield console.log("ничего не делаем, уже нажато"); //ничего не делаем, уже нажато
+        }
+        else if (result === "falsetrue") {
+            yield console.log(`clickornot = false, currentstatus = true`);
+            yield textgen.clickUppercaseCheckBox(); //разожму кликом
+            yield console.log('разожму кликом');
+            yield protractor_1.browser.sleep(1000); //чтобы посмотреть, отжалось ли
+        }
+        else if (result === "falsenull") {
+            yield console.log(`clickornot = false, currentstatus = null`);
+            //await console.log("");
+            yield console.log("оно не нажато и не должно быть нажато"); //оно не нажато и не должно быть нажато
+        }
+        yield console.log("### конец when");
+        //попытка3
+        /*
+        if(currentstatus === "null"){`currentstatus == "null"`}
+         if((clickornot ==='true') && (currentstatus === 'null')){console.log(`clickornot =="true" && currentstatus == "null"`)}
+         else if(clickornot ==="true" && currentstatus === "true"){console.log(`clickornot =="true" && currentstatus == "true"`)}
+         else if(clickornot ==="false" && currentstatus === "true"){console.log(`clickornot =="false" && currentstatus == "true"`)}
+         else if(clickornot ==="false" && currentstatus === "null"){console.log(`clickornot =="true" && currentstatus == "true"`)}
+         */
+        //попытка2
+        /*
+        if (clickornot == "true"){  //верхнему реестру быть, надо, чтобы было нажато
+            await console.log("зашёл в clickornot=true, currentstatus is "+currentstatus);
+            if(currentstatus == "true"){
+                await console.log("");
+                await console.log("ничего не делаем, уже нажато") //ничего не делаем, уже нажато
+            }
+            else if(currentstatus == "null"){
+                await textgen.clickUppercaseCheckBox();  //если не прожато, но долно быть прожато
+                await console.log('если не прожато, но долно быть прожато - жму');
+            }
+            else{console.log("нипопало");}
+        }
+        else if (clickornot == "false"){  //не надо включать опцию верхнего реестра
+            await console.log("зашёл в clickornot=false, currentstatus is "+currentstatus);
+            if(currentstatus == "true"){
+                await textgen.clickUppercaseCheckBox();  //разожму кликом
+                await console.log('разожму кликом');
+            }
+            else if(currentstatus == "null"){
+                await console.log("");
+                await console.log("оно не нажато и не должно быть нажато")  //оно не нажато и не должно быть нажато
+            }
+            else{console.log("нипопало2");}
+        }*/
+        //попытка1
+        /*
+        if (currentstatus  = "null"){   //тоже перепроверить
+            await console.log("зашёл в currentstatus  = null, clickornot is "+clickornot);
+            if(clickornot == "true"){
+                await textgen.clickUppercaseCheckBox();  //если не прожато, но долно быть прожато
+                await console.log('если не прожато, но долно быть прожато - жму');
+            }
+            else if(clickornot == "false"){
+                await console.log("");
+                await console.log("оно не нажато и не должно быть нажато")  //оно не нажато и не должно быть нажато
+            }
+        }
+        else if (currentstatus  = "true"){   //тоже перепроверить
+            await console.log("зашёл в currentstatus  = true, clickornot is "+clickornot);
+            await console.log('зашла в currentstatus=true')
+            await console.log('прожато таки')
+            if(clickornot == "true"){
+                await console.log("");
+                await console.log("ничего не делаем, уже нажато") //ничего не делаем, уже нажато
+            }
+            else if(clickornot == "false"){
+                await  textgen.clickUppercaseCheckBox();  //разожму кликом
+                await console.log('разожму кликом');
+            }
+        }*/
+    }));
 }));
-cucumber_1.When(/^User sets strict regime checkbox to "(.*?)"$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
-    if (string == "true") {
-        yield textgen.strictRegime.click();
-        yield textgen.strictRegime.getAttribute('checked').then((clickerornot) => {
-            console.log(`Позиция строгого режима: ${clickerornot}`);
-        });
-    }
-    else if (string == "false") { //м вообще удалить часть кода
-        yield textgen.strictRegime.getAttribute('checked').then((clickerornot) => {
-            console.log(`Позиция строгого режима: ${clickerornot}`);
-        });
-    }
-}));
+// When(/^User sets strict regime checkbox on "(.*?)"$/, async (clickornot) => {   //тк код в итоге - click(). если надо будет, чтобы в итоге в любом случае стояла/не стояла галочка, наод будет получить значение value (как в then)  и isSelected проверить (видео 50:53)
+//     if (clickornot == "true" && currentstatus != "false") {     //мб баг, так придёт булин или нан   //если не прожато, но долно быть прожато
+//         await textgen.clickUppercaseCheckBox();
+//     }
+//     else if (clickornot == "true" && currentstatus != "true") {     //мб баг, так придёт булин или нан
+//         console.log("") //ничего не делаем, уже нажато
+//     }
+//     else if (clickornot == "false" && currentstatus != "true") {     //мб баг, так придёт булин или нан   //оно не нажато и не должно быть нажато
+//         await textgen.clickUppercaseCheckBox();  //разожму кликом
+//     }
+//     else if (clickornot == "false" && currentstatus != "false") {     //мб баг, так придёт булин или нан   //оно не нажато и не должно быть нажато
+//         console.log("") //ничего не делаем, уже не нажато
+//     }
+// });
 cucumber_1.When(/^User clicks generate button$/, () => __awaiter(void 0, void 0, void 0, function* () {
-    yield textgen.generateButton.click();
+    yield textgen.clickGenerateButton();
 }));
-cucumber_1.Then(/^text was generated$/, () => __awaiter(void 0, void 0, void 0, function* () {
-    yield textgen.resultTextBox.getAttribute('value').then((generatedtext) => (expect(generatedtext).to.be.a('string')));
+cucumber_1.Then(/^Text variant field displays "(.*?)"$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
+    yield textgen.verifyTextVariantChosenAsExpected(string);
 }));
-cucumber_1.Then(/^number of symbols should be between "(.*?)" and "(.*?)"$/, (minvalue, maxvalue) => __awaiter(void 0, void 0, void 0, function* () {
-    yield textgen.resultTextBox.getAttribute('value').then((generatedtext) => (console.log(`Сгенерированный текст: ${generatedtext}
-        Количество знаков: ${generatedtext.length}`),
-        expect(calcLenght(minvalue, maxvalue, generatedtext.length)).to.equal('correctresultvalue')));
+cucumber_1.Then(/^Text uppercase checkbox state should be "(.*?)"$/, (shouldbeclicked) => __awaiter(void 0, void 0, void 0, function* () {
+    //старый способ
+    // await textgen.generatorElements.uppercaseCheckBox.getAttribute('checked').then((clickedornot) => {   //clickedornot  -  достала из сайта
+    //     console.log(`Hi from then check of uppercase. clickedornot is ${clickedornot}`);
+    //     if (shouldbeclicked == "true") {
+    //         expect(clickedornot).to.equal('true'); //true тут - приходящее value из кода сайта
+    //     }
+    //     else if (shouldbeclicked == "false") {
+    //         expect(clickedornot).to.equal(null); //null тут - приходящее value из кода сайта
+    //     }
+    // })
+    yield textgen.FindoutStatusUppercaseCheckBox().then((clickedornot) => __awaiter(void 0, void 0, void 0, function* () {
+        yield console.log(`Hi from find out uppercasestatus. clickedornot: ${clickedornot}`);
+        if (shouldbeclicked == "true") { //если галочка должна быть прожата
+            yield expect(clickedornot).to.equal('true'); //true тут - приходящее value из кода сайта. я ожидаю, что она прожата. кликнутость равна тру
+        }
+        else if (shouldbeclicked == "false") { //если галочка не должна быть прожата
+            yield expect(clickedornot).to.equal(null); //null тут - приходящее value из кода сайта. я ожидаю, что она не будет прожата
+        }
+    }));
+}));
+cucumber_1.Then(/^Text strict regime checkbox state is "(.*?)"$/, (string) => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.sleep(2000);
 }));
-function calcLenght(minvalue, maxvalue, resultvalue) {
-    if (Number(minvalue) <= Number(resultvalue) && Number(maxvalue) >= Number(resultvalue)) { //вариант решения -  split, в массив 3 числа и в цикл сравнивтаь - прогонять по пор. номеру элемента массива
-        console.log("Количество знаков верно: " + resultvalue);
-        return "correctresultvalue";
-    }
-    else {
-        console.log("Количество знаков неверно: " + resultvalue);
-        return "wrongresultvalue";
-    }
-}
+cucumber_1.Then(/^Number of symbols in generated text should be between "(.*?)" and "(.*?)"$/, (minvalue, maxvalue) => __awaiter(void 0, void 0, void 0, function* () {
+    yield textgen.verifyNumberOfSymbolsFromTextBox(minvalue, maxvalue);
+}));

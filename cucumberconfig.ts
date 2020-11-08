@@ -1,4 +1,4 @@
-import {Config} from "protractor";
+import {Config, browser} from "protractor";
 //import { inherits } from "util";
 import * as reporter from "cucumber-html-reporter"; //import everything (на всяк случай), писать будем "reporter"
 //var reporter = require('cucumber-html-reporter');
@@ -12,6 +12,11 @@ export let config: Config = {
     framework: 'custom',
     frameworkPath: require.resolve('protractor-cucumber-framework'),
     
+    params: {
+      defaultTimeout: 60000,
+      generatorPageURL: "https://service.webboss.pro/text-generator"
+  },
+
     // Capabilities to be passed to the webdriver instance.
     capabilities: {
       browserName: 'chrome'
@@ -21,6 +26,12 @@ export let config: Config = {
     // to protractor (in this example conf.js).
     // They may include glob patterns.
     specs: ['../features/generatetext.feature'],
+    
+    onPrepare: () =>{
+      browser.waitForAngularEnabled(false);
+      browser.ignoreSynchronization=true;
+    },
+
     onComplete: function () {
         console.log('onComplete');
         var options = {
