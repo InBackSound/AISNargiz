@@ -3,7 +3,6 @@ import { browser, by} from "protractor";
 import chai from "chai";
 var expect = chai.expect;
 import { textGeneratorPage} from '../PageObjects/textGeneratorPage';
-import { isNull } from "util";
 let textgen = new textGeneratorPage();
 
 
@@ -33,7 +32,7 @@ When (/^User sets symbols after paragraph: "(.*?)"$/, async(string)=> {
     await  textgen.entersymbolAfterText(string);
 });
 
-When(/^User sets uppercase checkbox on "(.*?)"$/, async (clickornot) => {   //тк код в итоге - click(). если надо будет, чтобы в итоге в любом случае стояла/не стояла галочка, наод будет получить значение value (как в then)  и isSelected проверить (видео 50:53)
+When(/^User sets uppercase checkbox on "(.*?)"$/, async (clickornot) => {  
     await textgen.FindoutStatusUppercaseCheckBox().then(async (currentstatus)=>{
         await console.log(`надо кликнуть?: ${clickornot}`);
         await console.log(`currentstatus: ${currentstatus}`);

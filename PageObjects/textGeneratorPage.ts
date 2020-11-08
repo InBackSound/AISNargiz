@@ -13,36 +13,36 @@ export class textGeneratorPage{
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.textVariantsList), defaultTimeout, "Generator page not loaded");  //нуачо, пусть проверяет это :)
     }
 
-    public async chooseTextVariant(variant:string){
+    public async chooseTextVariant(variant:string): Promise<void> {
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.textVariantsList), defaultTimeout, "textVariantsList not visible");
         await this.generatorElements.textVariantsList.element(by.cssContainingText("option", variant)).click();
     }
 
-   public async enterNumberOfPharagr(numbofphar:string){
+   public async enterNumberOfPharagr(numbofphar:string): Promise<void> {
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.paragrNumber), defaultTimeout, "paragrNumber not visible");
         await this.generatorElements.paragrNumber.clear();
         await this.generatorElements.paragrNumber.sendKeys(numbofphar); 
     }
 
-    public async enterMinSymbols(minsymbols:string){
+    public async enterMinSymbols(minsymbols:string): Promise<void> {
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.minSymbols), defaultTimeout, "minSymbols not visible");
         await this.generatorElements.minSymbols.clear();
         await this.generatorElements.minSymbols.sendKeys(minsymbols); 
     }
 
-    public async enterMaxSymbols(maxsymbols:string){
+    public async enterMaxSymbols(maxsymbols:string): Promise<void> {
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.maxSymbols), defaultTimeout, "maxSymbols not visible");
         await this.generatorElements.maxSymbols.clear();
         await this.generatorElements.maxSymbols.sendKeys(maxsymbols); 
     }
 
-    public async entersymbolBeforeText(symbolbeforetext:string){
+    public async entersymbolBeforeText(symbolbeforetext:string): Promise<void> {
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.symbolBeforeText), defaultTimeout, "symbolBeforeText not visible");
         await this.generatorElements.symbolBeforeText.clear();
         await this.generatorElements.symbolBeforeText.sendKeys(symbolbeforetext); 
     }
 
-    public async entersymbolAfterText(symbolaftertext:string){
+    public async entersymbolAfterText(symbolaftertext:string): Promise<void> {
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.symbolAfterText), defaultTimeout, "symbolAfterText not visible");
         await this.generatorElements.symbolAfterText.clear();
         await this.generatorElements.symbolAfterText.sendKeys(symbolaftertext); 
@@ -67,12 +67,11 @@ export class textGeneratorPage{
             this.generatorElements.uppercaseCheckBox.getAttribute('checked').then(async (value) => {
                 //await console.log(`из возвращаемого обещания (FindoutStatusUppercaseCheckBox): ${value}`);
                 await status(value);
-            });  //перепроверить, что же он там возвращает
-            //status(a)  //  вернёт null или true
+            });
         });
     }
 
-    public async clickUppercaseCheckBox(){
+    public async clickUppercaseCheckBox(): Promise<void> {
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.uppercaseCheckBox), defaultTimeout, "uppercaseCheckBox not visible");
         await this.generatorElements.uppercaseCheckBox.click();
     }
@@ -81,17 +80,17 @@ export class textGeneratorPage{
         return (this.generatorElements.strictRegimeCheckBox.isSelected)   //смотрю на текущий статус галочки. очень старый код
    }
 
-    public async clickStrictRegimeCheckBox(){
+    public async clickStrictRegimeCheckBox(): Promise<void> {
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.strictRegimeCheckBox), defaultTimeout, "strictRegimeCheckBox not visible");
         await this.generatorElements.strictRegimeCheckBox.click();
     }
 
-    public async clickGenerateButton(){
+    public async clickGenerateButton(): Promise<void> {
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.generateButton), defaultTimeout, "generateButton not visible");
         await this.generatorElements.generateButton.click();
     }
 
-    public async verifyTextVariantChosenAsExpected(expectedVariant:string){
+    public async verifyTextVariantChosenAsExpected(expectedVariant:string): Promise<void> {
         //let actualVariant = await this.generatorElements.textVariantsList.getAttribute('value');  //ед. норм вариант, но я не проверяю по атрибутам. как вариант - присвоить номер каждому из 3х выборов тут. пока проверяю проверяемое
         let actualVariant = await this.generatorElements.textVariantsList.element(by.cssContainingText("option", expectedVariant)).getText(); //по сути проверяю, тот ли текст в опции. а не выбрана или нет в итоге
         //console.log(`actualVariant: ${actualVariant}`);
@@ -99,17 +98,17 @@ export class textGeneratorPage{
         await expect(actualVariant).to.equal(expectedVariant)
     }
 
-    public async VerifyUppercaseStateTrue(){
+    public async VerifyUppercaseStateTrue(): Promise<void> {
         let actualState = await this.generatorElements.uppercaseCheckBox.getAttribute('checked');
         await expect(actualState).to.equal('true');
     }
 
-    public async VerifyStrickRegimeStateTrue(){
+    public async VerifyStrickRegimeStateTrue(): Promise<void> {
         let actualState = await this.generatorElements.strictRegimeCheckBox.getAttribute('checked');
         await expect(actualState).to.equal('true')
     }
 
-    public async verifyNumberOfSymbolsFromTextBox(minsymbols: string, maxsymbols: string) {
+    public async verifyNumberOfSymbolsFromTextBox(minsymbols: string, maxsymbols: string): Promise<void> {
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.resultTextBox), defaultTimeout, "resultTextBox not visible");
         await this.generatorElements.resultTextBox.getAttribute('value').then(async (generatedtext) => {
             await console.log(`Допустимое количество знаков: с ${minsymbols} по ${maxsymbols} включительно`);

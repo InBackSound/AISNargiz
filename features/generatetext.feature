@@ -16,7 +16,8 @@ When User sets uppercase checkbox on "true"
     And User sets uppercase checkbox on "false"
     And User sets uppercase checkbox on "true"
     And User sets uppercase checkbox on "true"
-Then Text uppercase checkbox state should be "true"
+    And User sets uppercase checkbox on "false"
+Then Text uppercase checkbox state should be "false"
 
 # @GeneratorTesting_notest
 # Scenario: Verify strict regime checkbox was clicked

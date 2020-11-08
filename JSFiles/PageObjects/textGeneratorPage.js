@@ -87,8 +87,7 @@ class textGeneratorPage {
                 this.generatorElements.uppercaseCheckBox.getAttribute('checked').then((value) => __awaiter(this, void 0, void 0, function* () {
                     //await console.log(`из возвращаемого обещания (FindoutStatusUppercaseCheckBox): ${value}`);
                     yield status(value);
-                })); //перепроверить, что же он там возвращает
-                //status(a)  //  вернёт null или true
+                }));
             });
         });
     }
