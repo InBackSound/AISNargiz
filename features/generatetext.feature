@@ -1,11 +1,11 @@
+
 Feature: I am going to generate text
+    @GeneratorTesting
+    Scenario: Verify system displays the same text variant value as selected
 
-@GeneratorTesting
-Scenario: Verify system displays the same text variant value as selected
-
-Given User navigates to Text Generator site
-When User selects "Английский (Lorem ipsum)" in text variant field
-Then Text variant field displays "Английский (Lorem ipsum)"
+        Given User navigates to Text Generator site
+        When User selects "Английский (Lorem ipsum)" in text variant field
+        Then Text variant field displays "Английский (Lorem ipsum)"
 
 @GeneratorTesting
 Scenario: Verify uppercase checkbox recklick right
@@ -19,12 +19,12 @@ When User sets uppercase checkbox on "true"
     And User sets uppercase checkbox on "false"
 Then Text uppercase checkbox state should be "false"
 
-# @GeneratorTesting_notest
-# Scenario: Verify strict regime checkbox was clicked
+@GeneratorTesting
+Scenario: Verify strict regime checkbox was clicked
 
-# Given User navigates to Text Generator site
-# When User sets strict regime checkbox on "false"
-# Then Text strict regime checkbox state is "false"
+Given User navigates to Text Generator site
+When User sets strict regime checkbox on "false"
+Then Text strict regime checkbox state is "false"
 
 @GeneratorTesting
 Scenario: Verify generated text has expected number of symbols

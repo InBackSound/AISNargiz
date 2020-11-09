@@ -2,7 +2,6 @@ import { ExpectedConditions, promise, browser,element,by} from "protractor";
 import { generatorRepository } from "../objectsRepository/generator.obj";
 import { verifyLenght } from "../Calculations/calculations";
 import chai from "chai";
-import { isBoolean } from "util";
 var expect = chai.expect;
 const defaultTimeout = 6000;
 
@@ -49,20 +48,6 @@ export class textGeneratorPage{
     }
 
     public async FindoutStatusUppercaseCheckBox() : Promise<string> {   //смотрю на текущий статус галочки
-        //var result: string = 'default';
-        // this.generatorElements.uppercaseCheckBox.getAttribute('checked').then((status) => {
-        //     result = "checkboxtrue";
-        //     if (status) {   
-        //         console.log(` СТАТУС ТРУШЕЧКА TextGeneratorPage -> FindoutStatusUppercaseCheckBox -> if(status) -> status: ${status}`)
-        //         result = "checkboxtrue";
-        //     }
-        //     else {
-        //         console.log(`СТАТУС НЕ ТРУ УВЫ TextGeneratorPage -> FindoutStatusUppercaseCheckBox -> else -> status: ${status}`)
-        //         result = "checkboxfalse";
-
-        //     }
-
-        // })
         return new Promise((status) => {   //Any synchronous errors thrown in a then (or catch) result in the returned promise to fail: https://basarat.gitbook.io/typescript/future-javascript/promise
             this.generatorElements.uppercaseCheckBox.getAttribute('checked').then(async (value) => {
                 //await console.log(`из возвращаемого обещания (FindoutStatusUppercaseCheckBox): ${value}`);
@@ -125,4 +110,3 @@ export class textGeneratorPage{
 
 
 }
-

@@ -1,3 +1,5 @@
 var {setDefaultTimeout} = require('cucumber');
 
-setDefaultTimeout(60 * 1000);
+export = function timeSteps() {
+this.setDefaultTimeout(60 * 1000);
+}
