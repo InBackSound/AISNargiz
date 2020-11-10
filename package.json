@@ -6,6 +6,7 @@
     "scripts": {
         "postinstall": "node ./node_modules/protractor/bin/webdriver-manager update",
         "webdriver": "node ./node_modules/protractor/bin/webdriver-manager start --versions.chrome 85.0.4183.87",
+        "fasttest": "node ./node_modules/protractor/bin/protractor ./fastconfig.js",
         "test": "node ./node_modules/protractor/bin/protractor ./cucumberconfig.js",
         "update-reporter": "node ./node_modules/serenity-cli/bin/serenity update",
         "webdriver-update": "./node_modules/.bin/webdriver-manager update --versions.chrome 85.0.4183.87",

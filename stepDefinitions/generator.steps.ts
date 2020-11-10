@@ -76,10 +76,19 @@ this.When(/^User sets uppercase checkbox on "(.*?)"$/, async (clickornot) => {
 
 });
 
-
 this.When (/^User clicks generate button$/, async()=> {
     await textgen.clickGenerateButton();
 });
+
+
+this.When (/^User enters "(.*?)" in Donate field iframe$/, async(string)=>{  
+    await textgen.enterTextInDonateField(string);
+});
+
+this.Then (/^Field displays "(.*?)"$/, async(string)=>{
+    await textgen.verifyTextDisplaysCorrectInDonate(string);
+});
+
 
 this.Then(/^Text variant field displays "(.*?)"$/, async(string)=>{
     await textgen.verifyTextVariantChosenAsExpected(string);

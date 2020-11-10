@@ -75,6 +75,24 @@ export class textGeneratorPage{
         await this.generatorElements.generateButton.click();
     }
 
+    public async enterTextInDonateField(text: string): Promise<void> {
+        await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.donateIframe), defaultTimeout, "Donate IFrame not visible");
+        await browser.switchTo().frame(this.generatorElements.donateIframe.getWebElement());
+        //await element(by.xpath("//textarea[@name='comment']")).sendKeys(text);
+        await this.generatorElements.donateCommentField.sendKeys(text);
+        await browser.switchTo().defaultContent();  //выйти из iframe
+    }
+
+    public async verifyTextDisplaysCorrectInDonate(expectedtext: string): Promise<void> {
+        await browser.switchTo().frame(this.generatorElements.donateIframe.getWebElement());  
+        // await element(by.id("uniq160491480360547114")).getAttribute('value').then(async (displayedtext) => {
+        let displayedtext = await this.generatorElements.donateCommentField.getAttribute('value');
+        await console.log(`displayedtext: ${displayedtext}`);
+        await console.log(`expectedtext: ${expectedtext}`);
+        await expect(displayedtext).to.equal(expectedtext);
+        await browser.switchTo().defaultContent();
+    }
+
     public async verifyTextVariantChosenAsExpected(expectedVariant:string): Promise<void> {
         //let actualVariant = await this.generatorElements.textVariantsList.getAttribute('value');  //ед. норм вариант, но я не проверяю по атрибутам. как вариант - присвоить номер каждому из 3х выборов тут. пока проверяю проверяемое
         let actualVariant = await this.generatorElements.textVariantsList.element(by.cssContainingText("option", expectedVariant)).getText(); //по сути проверяю, тот ли текст в опции. а не выбрана или нет в итоге

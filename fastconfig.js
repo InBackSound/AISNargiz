@@ -1,8 +1,4 @@
 const crew = require('serenity-js/lib/stage_crew');
-const fs = require("fs");
-const rimraf = require('rimraf');
-const mkdirp = require("mkdirp");
-const reportsFolder = process.cwd() + "/target";
 
 exports.config = {
     chromeOnly: true,
@@ -11,21 +7,16 @@ exports.config = {
     framework: 'custom',
     frameworkPath: require.resolve('serenity-js'),
 
-
-
     params: {
         defaultTimeout: 60000,
         generatorPageURL: "https://service.webboss.pro/text-generator"
     },
 
     cucumberOpts: {
-        require: ['./stepDefinitions/*.ts'], // запускать это
-        tags: "@GeneratorTesting", //["@AngularTesting or @CalculatorTesting"],    //через запятую не получилось
+        require: ['./FastTest/fasttest.ts'], // запускать это
         compiler: 'ts:ts-node/register',
         format: 'pretty'
     },
-
-    specs: ['features/*.feature'],
 
     serenity: {
         crew: [
@@ -35,17 +26,7 @@ exports.config = {
 
         dialect: 'cucumber',
     },
-
-    beforeLaunch: () => {
-        //Check if reports directory exists, if not create it
-        //If exists - clean it
-        if (!fs.existsSync(reportsFolder)) {
-            mkdirp.sync(reportsFolder);
-        } else {
-            rimraf.sync(reportsFolder);
-            mkdirp.sync(reportsFolder);
-        }
-    },
+    specs: ['FastTest/*.feature'],
 
     onPrepare: () => {
         browser.waitForAngularEnabled(false);

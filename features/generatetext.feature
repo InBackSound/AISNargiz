@@ -1,13 +1,13 @@
 
 Feature: I am going to generate text
-    @GeneratorTesting
+    @GeneratorTesting_no
     Scenario: Verify system displays the same text variant value as selected
 
         Given User navigates to Text Generator site
         When User selects "Английский (Lorem ipsum)" in text variant field
         Then Text variant field displays "Английский (Lorem ipsum)"
 
-@GeneratorTesting
+@GeneratorTesting_no
 Scenario: Verify uppercase checkbox recklick right
 
 Given User navigates to Text Generator site
@@ -19,14 +19,14 @@ When User sets uppercase checkbox on "true"
     And User sets uppercase checkbox on "false"
 Then Text uppercase checkbox state should be "false"
 
-@GeneratorTesting
+@GeneratorTesting_no
 Scenario: Verify strict regime checkbox was clicked
 
 Given User navigates to Text Generator site
 When User sets strict regime checkbox on "false"
 Then Text strict regime checkbox state is "false"
 
-@GeneratorTesting
+@GeneratorTesting_no
 Scenario: Verify generated text has expected number of symbols
 
 Given User navigates to Text Generator site
@@ -40,3 +40,9 @@ When User selects "Английский (Lorem ipsum)" in text variant field
     #And User sets strict regime checkbox on "false"
     And User clicks generate button
 Then Number of symbols in generated text should be between "50" and "100"
+
+@GeneratorTesting
+Scenario: Verify text, written by user in Donate iframe, displays correctly
+Given User navigates to Text Generator site
+When User enters "Место для донатов" in Donate field iframe
+Then Field displays "Место для донатов"
