@@ -15,7 +15,8 @@ exports.config = {
     cucumberOpts: {
         require: ['./FastTest/fasttest.ts'], // запускать это
         compiler: 'ts:ts-node/register',
-        format: 'pretty'
+        format: 'pretty',
+        tags: "@GeneratorTesting"
     },
 
     serenity: {
@@ -41,7 +42,7 @@ exports.config = {
         maxInstances: 2,
         chromeOptions: {
             //Standard mode
-            args: ["--window-size=1280,1720"]
+            args: ["--window-size=1280,600"]
         }
     },
 

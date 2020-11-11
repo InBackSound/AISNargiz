@@ -1,10 +1,13 @@
 import {After,Before, Status} from "cucumber";
 import { browser } from "protractor";
+// import { textGeneratorPage} from '../PageObjects/textGeneratorPage';
+// let textgen = new textGeneratorPage();
 
 export = function hookedSteps() {
-this.Before(async ()=> {
-  // This hook will be executed before all scenarios
-});
+
+// this.Before(async ()=> {
+//   
+// });
 
 
   this.After(async ()=> {

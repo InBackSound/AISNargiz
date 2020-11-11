@@ -81,15 +81,6 @@ this.When (/^User clicks generate button$/, async()=> {
 });
 
 
-this.When (/^User enters "(.*?)" in Donate field iframe$/, async(string)=>{  
-    await textgen.enterTextInDonateField(string);
-});
-
-this.Then (/^Field displays "(.*?)"$/, async(string)=>{
-    await textgen.verifyTextDisplaysCorrectInDonate(string);
-});
-
-
 this.Then(/^Text variant field displays "(.*?)"$/, async(string)=>{
     await textgen.verifyTextVariantChosenAsExpected(string);
 });
@@ -114,6 +105,36 @@ this.Then(/^Text strict regime checkbox state is "(.*?)"$/, async(string)=>{   /
 
 this.Then (/^Number of symbols in generated text should be between "(.*?)" and "(.*?)"$/, async(minvalue,maxvalue)=> {
     await textgen.verifyNumberOfSymbolsFromTextBox(minvalue,maxvalue);
+});
+
+//iframe donates
+
+this.When (/^User enters "(.*?)" in Donate field iframe$/, async(string)=>{  
+    await textgen.clickOnAgreeCookieButton();  //надо закрыть соглашение снизу, иначе может не промотаться
+    await textgen.enterTextInDonateField(string);
+});
+
+this.Then (/^Donate field displays "(.*?)"$/, async(string)=>{
+    await textgen.verifyTextDisplaysCorrectInDonate(string);
+});
+
+this.When (/^User choose "(.*?)" payment system$/, async(string)=> {
+    await textgen.clickOnAgreeCookieButton(); //надо закрыть соглашение снизу, иначе не промотается
+    await textgen.clickOnPaymentRadioButton(string);
+});
+
+this.Then (/^User sees "(.*?)" payment system was chosen$/, async(string)=> {
+    await textgen.verifyPaymentWasChosenCorrectly(string);
+});
+
+//menu
+this.When (/^User hover on menu item Services$/, async()=> {
+    await textgen.hoverOnMenuServices();
+});
+
+this.Then (/^User can hover on menu item Generator Text$/, async()=> {
+    await textgen.clickOnAgreeCookieButton(); //надо закрыть соглашение снизу, иначе не промотается
+    await textgen.verifyHoverOnGGenTextItemPossible();
 });
 
 }

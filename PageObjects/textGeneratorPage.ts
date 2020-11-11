@@ -75,24 +75,6 @@ export class textGeneratorPage{
         await this.generatorElements.generateButton.click();
     }
 
-    public async enterTextInDonateField(text: string): Promise<void> {
-        await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.donateIframe), defaultTimeout, "Donate IFrame not visible");
-        await browser.switchTo().frame(this.generatorElements.donateIframe.getWebElement());
-        //await element(by.xpath("//textarea[@name='comment']")).sendKeys(text);
-        await this.generatorElements.donateCommentField.sendKeys(text);
-        await browser.switchTo().defaultContent();  //выйти из iframe
-    }
-
-    public async verifyTextDisplaysCorrectInDonate(expectedtext: string): Promise<void> {
-        await browser.switchTo().frame(this.generatorElements.donateIframe.getWebElement());  
-        // await element(by.id("uniq160491480360547114")).getAttribute('value').then(async (displayedtext) => {
-        let displayedtext = await this.generatorElements.donateCommentField.getAttribute('value');
-        await console.log(`displayedtext: ${displayedtext}`);
-        await console.log(`expectedtext: ${expectedtext}`);
-        await expect(displayedtext).to.equal(expectedtext);
-        await browser.switchTo().defaultContent();
-    }
-
     public async verifyTextVariantChosenAsExpected(expectedVariant:string): Promise<void> {
         //let actualVariant = await this.generatorElements.textVariantsList.getAttribute('value');  //ед. норм вариант, но я не проверяю по атрибутам. как вариант - присвоить номер каждому из 3х выборов тут. пока проверяю проверяемое
         let actualVariant = await this.generatorElements.textVariantsList.element(by.cssContainingText("option", expectedVariant)).getText(); //по сути проверяю, тот ли текст в опции. а не выбрана или нет в итоге
@@ -123,8 +105,67 @@ export class textGeneratorPage{
         })
     }
 
+    //связано с iframe - донатами
+
+    public async enterTextInDonateField(text: string): Promise<void> {
+        await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.donateIframe), defaultTimeout, "Donate IFrame not visible");
+        await browser.switchTo().frame(this.generatorElements.donateIframe.getWebElement());
+        //await element(by.xpath("//textarea[@name='comment']")).sendKeys(text);
+        await this.generatorElements.donateCommentField.sendKeys(text);
+        await browser.switchTo().defaultContent();  //выйти из iframe
+    }
+
+    public async verifyTextDisplaysCorrectInDonate(expectedtext: string): Promise<void> {
+        await browser.switchTo().frame(this.generatorElements.donateIframe.getWebElement());  
+        // await element(by.id("uniq160491480360547114")).getAttribute('value').then(async (displayedtext) => {
+        let displayedtext = await this.generatorElements.donateCommentField.getAttribute('value');
+        await console.log(`displayedtext: ${displayedtext}`);
+        await console.log(`expectedtext: ${expectedtext}`);
+        await expect(displayedtext).to.equal(expectedtext);
+        await browser.switchTo().defaultContent();
+    }
+
+    public async clickOnPaymentRadioButton(payment: string): Promise<void> {
+        await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.donateIframe), defaultTimeout, "Donate IFrame not visible");
+        await browser.switchTo().frame(this.generatorElements.donateIframe.getWebElement());
+        let paymentSystem = await element(by.xpath(`//input[@aria-label='${payment}']`)); //пер. варианта оплаты
+        await paymentSystem.click();
+        await browser.switchTo().defaultContent();  //выйти из iframe
+    }
+
+    public async verifyPaymentWasChosenCorrectly(expPaymentSystem: string): Promise<void> {
+        await browser.switchTo().frame(this.generatorElements.donateIframe.getWebElement());
+        let paymentSystem = await element(by.xpath(`//input[@aria-label='${expPaymentSystem}']`)); //пер. варианта оплаты
+        await paymentSystem.getAttribute('checked').then(async (checkedornot)=>{
+            await expect(checkedornot).to.equal('true');  //RECHECK
+        });
+        await browser.switchTo().defaultContent();  //выйти из iframe
+    }
 
 
+    //Cookie time
+    public async clickOnAgreeCookieButton(): Promise<void> {   //надо ждать другое. потом искать этот элемент и кликать, если есть
+        //но по-хорошему ждать этот элемент. но если не будет, идти дальше
+        //и по-хорошему отдельным методом и вынести это в степы
+        await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.coockieAgreementButton), defaultTimeout, "Coockie time not visible");
+        
+        await this.generatorElements.coockieAgreementButton.click();
+    }
+
+
+    public async hoverOnMenuServices(): Promise<void> {    //не рабоатет, рассинхрон в названиях
+        await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.menuServices), defaultTimeout, "Menu is not visible");
+        await browser.sleep(1000);
+        await this.generatorElements.menuServices.hover;
+        await browser.sleep(1000);
+    }
+    
+    public async verifyHoverOnGGenTextItemPossible(): Promise<void> {
+        await this.generatorElements.genTextItem.click();
+        let result = await this.generatorElements.genTextItem.getAttribute('focused');
+        await console.log(`result: ${result}`);
+        //await expect(result).to.equal('');
+    }
 
 
 }

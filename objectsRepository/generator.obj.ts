@@ -13,9 +13,13 @@ export class generatorRepository{
     readonly symbolAfterText: ElementFinder = element(by.id("rtconf5"));
     readonly uppercaseCheckBox: ElementFinder = element(by.id("rttoLower"));
     readonly strictRegimeCheckBox: ElementFinder = element(by.id("rtStrogo"));
-    //readonly iFrameDonateField: ElementFinder = element(by.id("uniq160491480360547114"))
+    readonly menuServices: ElementFinder = element(by.xpath("//a[@title='Сервисы']"));
+    readonly genTextItem: ElementFinder = element(by.xpath("//a[@title='Генератор текста']"));
 
     //Iframe, needed to enter and find some elements in DOM, if you won't switch to it - you will have error "Element Not Found"
     readonly donateIframe: ElementFinder = element(by.xpath("//div[@id='blago']//iframe"));
     readonly donateCommentField = element(by.xpath("//textarea[@name='comment']"));  //inside
+
+    readonly coockieAgreementButton: ElementFinder = element(by.css("div#cookies_warning .yes")); //всплывающее окошко снизу
+
 }
