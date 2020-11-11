@@ -13,8 +13,10 @@ export class generatorRepository{
     readonly symbolAfterText: ElementFinder = element(by.id("rtconf5"));
     readonly uppercaseCheckBox: ElementFinder = element(by.id("rttoLower"));
     readonly strictRegimeCheckBox: ElementFinder = element(by.id("rtStrogo"));
-    readonly menuServices: ElementFinder = element(by.xpath("//a[@title='Сервисы']"));
-    readonly genTextItem: ElementFinder = element(by.xpath("//a[@title='Генератор текста']"));
+    readonly menuHeaderServices: ElementFinder = element(by.xpath("//a[@title='Сервисы']"));
+    readonly menuServices: ElementFinder = element(by.xpath("//ul[@class='adv-service submenu sub']"));
+    readonly passwordGenLink: ElementFinder = element(by.xpath("//a[@href='https://service.webboss.pro/password-online-generator']"));  //inside Services menu
+
 
     //Iframe, needed to enter and find some elements in DOM, if you won't switch to it - you will have error "Element Not Found"
     readonly donateIframe: ElementFinder = element(by.xpath("//div[@id='blago']//iframe"));

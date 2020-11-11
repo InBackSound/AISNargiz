@@ -56,18 +56,23 @@ export class textGeneratorPage{
         });
     }
 
+    public async FindoutStatusStrictRegimeCheckBox() : Promise<string> {
+        return new Promise((status) => {   
+            this.generatorElements.strictRegimeCheckBox.getAttribute('checked').then(async (value) => {
+                //await console.log(`из возвращаемого обещания (FindoutStatusStrictRegimeCheckBox): ${value}`);
+                await status(value);
+            });
+        });
+    }
+
     public async clickUppercaseCheckBox(): Promise<void> {
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.uppercaseCheckBox), defaultTimeout, "uppercaseCheckBox not visible");
         await this.generatorElements.uppercaseCheckBox.click();
     }
-
-    public async FindoutStatusStrictRegimeCheckBox() {
-        return (this.generatorElements.strictRegimeCheckBox.isSelected)   //смотрю на текущий статус галочки. очень старый код
-   }
-
     public async clickStrictRegimeCheckBox(): Promise<void> {
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.strictRegimeCheckBox), defaultTimeout, "strictRegimeCheckBox not visible");
         await this.generatorElements.strictRegimeCheckBox.click();
+        console.log('прожала strict regime')
     }
 
     public async clickGenerateButton(): Promise<void> {
@@ -82,7 +87,7 @@ export class textGeneratorPage{
         //console.log(`expectedVariant: ${expectedVariant}`);
         await expect(actualVariant).to.equal(expectedVariant)
     }
-
+/*
     public async VerifyUppercaseStateTrue(): Promise<void> {
         let actualState = await this.generatorElements.uppercaseCheckBox.getAttribute('checked');
         await expect(actualState).to.equal('true');
@@ -92,7 +97,7 @@ export class textGeneratorPage{
         let actualState = await this.generatorElements.strictRegimeCheckBox.getAttribute('checked');
         await expect(actualState).to.equal('true')
     }
-
+*/
     public async verifyNumberOfSymbolsFromTextBox(minsymbols: string, maxsymbols: string): Promise<void> {
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.resultTextBox), defaultTimeout, "resultTextBox not visible");
         await this.generatorElements.resultTextBox.getAttribute('value').then(async (generatedtext) => {
@@ -153,18 +158,18 @@ export class textGeneratorPage{
     }
 
 
-    public async hoverOnMenuServices(): Promise<void> {    //не рабоатет, рассинхрон в названиях
-        await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.menuServices), defaultTimeout, "Menu is not visible");
-        await browser.sleep(1000);
-        await this.generatorElements.menuServices.hover;
-        await browser.sleep(1000);
+    public async hoverOnMenuItem(): Promise<void> {    //не рабоатет, рассинхрон в названиях
+        await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.menuHeaderServices), defaultTimeout, "Menu is not visible");
+        await browser.actions().
+            mouseMove(this.generatorElements.menuHeaderServices).
+            perform();
     }
     
-    public async verifyHoverOnGGenTextItemPossible(): Promise<void> {
-        await this.generatorElements.genTextItem.click();
-        let result = await this.generatorElements.genTextItem.getAttribute('focused');
-        await console.log(`result: ${result}`);
-        //await expect(result).to.equal('');
+    public async verifyItemMenuOpens(): Promise<void> {
+        let displayed_or_not = await this.generatorElements.menuServices.isDisplayed();
+        //await console.log('isenabled??? '+displayed_or_not);   //false_true
+        //await this.generatorElements.passwordGenLink.click();   //можно кликнуть на пункт меню
+        await expect(displayed_or_not).to.equal(true); 
     }
 
 

@@ -1,6 +1,7 @@
 import {browser, by, element, ExpectedConditions} from "protractor";
 const defaultTimeout = 6000;
 
+
 export = function genSteps(): void {
     this.Given(/^User navigates to Text Generator site$/, async()=> {
         await browser.navigate().to(browser.params.generatorPageURL);
@@ -45,7 +46,31 @@ this.When (/^User choose "(.*?)" payment system$/, async(string)=> {
         await browser.sleep(1000);   
     });
     
+//menu
+this.When (/^User hover on menu item Services$/, async()=> {
+    await browser.wait(ExpectedConditions.visibilityOf(element(by.css("div#cookies_warning .yes"))), defaultTimeout, "Coockie time not visible");
+    await browser.element(by.css("div#cookies_warning .yes")).click();
+    await browser.sleep(1000);
+    //await browser.element(by.xpath("//a[@title='Сервисы']"));
+    //await browser.element(by.css("//a[@title='Сервисы']")).hover;
+    //await browser.switchTo().frame(element(by.xpath("//div[@id='blago']//iframe")).getWebElement());  //(by.css(".modal-iframe"));
+    //let a = await element(by.xpath(`//input[@aria-label='Pay via wallet']`));
+    //await browser.executeScript('$("//input[@aria-label='Pay via wallet']").trigger("mouseover")');
+    let searchedElement = await browser.element(by.xpath("//a[@href='https://service.webboss.pro/']"));
+    //await browser.executeScript('$("searchedElement").trigger("mouseover")');
+    browser.actions().
+        mouseMove(searchedElement).
+        perform();
+ 
+    await browser.sleep(1000);
 
+
+});
+
+this.Then (/^User can hover on menu item Generator Text$/, async()=> {
+   
+    await element(by.xpath("//a[@title='Генератор текста']")).hover;
+});
 
     
 

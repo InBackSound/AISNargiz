@@ -1,13 +1,13 @@
 
 Feature: I am going to generate text
-    @GeneratorTestingno
+    @GeneratorTesting
     Scenario: Verify system displays the same text variant value as selected
 
         Given User navigates to Text Generator site
-        When User selects "Английский (Lorem ipsum)" in text variant field
-        Then Text variant field displays "Английский (Lorem ipsum)"
+        When User selects "Собственные символы" in text variant field
+        Then Text variant field displays "Собственные символы"
 
-@GeneratorTestingno
+@GeneratorTesting
 Scenario: Verify uppercase checkbox recklick right
 
 Given User navigates to Text Generator site
@@ -19,25 +19,29 @@ When User sets uppercase checkbox on "true"
     And User sets uppercase checkbox on "false"
 Then Text uppercase checkbox state should be "false"
 
-@GeneratorTesting_no
+@GeneratorTesting
 Scenario: Verify strict regime checkbox was clicked
 
 Given User navigates to Text Generator site
-When User sets strict regime checkbox on "false"
-Then Text strict regime checkbox state is "false"
+When User sets strict regime checkbox on "true"
+    And User sets strict regime checkbox on "false"
+    And User sets strict regime checkbox on "false"
+    And User sets strict regime checkbox on "true"
+    And User sets strict regime checkbox on "true"
+Then Text strict regime checkbox state should be "true"
 
-@GeneratorTestingno
+@GeneratorTesting
 Scenario: Verify generated text has expected number of symbols
 
 Given User navigates to Text Generator site
-When User selects "Английский (Lorem ipsum)" in text variant field 
+When User selects "Русский текст" in text variant field 
     And User sets number of paragraphs: "1" 
     And User sets min number of symbols in each paragraph: "50"
     And User sets max number of symbols in each paragraph: "100"
     And User sets symbols before paragraph: "<p>"
     And User sets symbols after paragraph: "/<p>"
-    And User sets uppercase checkbox on "true"
-    #And User sets strict regime checkbox on "false"
+    And User sets uppercase checkbox on "false"
+    And User sets strict regime checkbox on "true"
     And User clicks generate button
 Then Number of symbols in generated text should be between "50" and "100"
 
@@ -59,9 +63,9 @@ When User choose "Pay via direct carrier billing" payment system
 Then User sees "Pay via direct carrier billing" payment system was chosen
 
 
-@GeneratorTestingno
+@GeneratorTesting
 Scenario: Verify menu Services shows after user hover on menu item Uslugi
 
 Given User navigates to Text Generator site
-When User hover on menu item Services
-Then User can hover on menu item Generator Text
+When User hovers on menu item Services
+Then Servises list opens
