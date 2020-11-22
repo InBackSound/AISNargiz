@@ -15,12 +15,13 @@ exports.config = {
 
     params: {
         defaultTimeout: 60000,
-        generatorPageURL: "https://service.webboss.pro/text-generator"
+        generatorPageURL: "https://service.webboss.pro/text-generator",
+        onlinerPageURL: "https://www.onliner.by/"
     },
 
     cucumberOpts: {
         require: ['./stepDefinitions/*.ts'], // запускать это
-        tags: "@GeneratorTesting", //["@AngularTesting or @CalculatorTesting"],    //через запятую не получилось
+
         compiler: 'ts:ts-node/register',
         format: 'pretty'
     },

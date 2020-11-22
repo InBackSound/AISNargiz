@@ -1,7 +1,7 @@
 import { browser, by} from "protractor";
 import chai from "chai";
 var expect = chai.expect;
-import { textGeneratorPage} from '../PageObjects/textGeneratorPage';
+import { textGeneratorPage} from '../PageObjects/text.generator.page';
 let textgen = new textGeneratorPage();
 
 
@@ -10,7 +10,7 @@ export = function genSteps(): void {
 this.setDefaultTimeout(60 * 1000);
 
 this.Given(/^User navigates to Text Generator site$/, async()=> {
-        await browser.navigate().to(browser.params.generatorPageURL);
+        await textgen.OpenGeneratorByURL();
         await textgen.Loaded();
 });
 

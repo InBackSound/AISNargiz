@@ -9,7 +9,8 @@ exports.config = {
 
     params: {
         defaultTimeout: 60000,
-        generatorPageURL: "https://service.webboss.pro/text-generator"
+        generatorPageURL: "https://service.webboss.pro/text-generator",
+        onlinerPageURL: "https://www.onliner.by/"
     },
 
     cucumberOpts: {
@@ -39,7 +40,7 @@ exports.config = {
     capabilities: {
         browserName: 'chrome',
         shardTestFiles: true,
-        maxInstances: 2,
+        maxInstances: 4,
         chromeOptions: {
             //Standard mode
             args: ["--window-size=1280,600"]

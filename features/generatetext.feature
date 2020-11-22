@@ -1,4 +1,3 @@
-
 Feature: I am going to generate text
     @GeneratorTesting
     Scenario: Verify system displays the same text variant value as selected
@@ -59,8 +58,8 @@ Then Donate field displays "Место для донатов"
 Scenario: Verify radio button of payment system was chosen correctly in Donate iframe
 
 Given User navigates to Text Generator site
-When User choose "Pay via direct carrier billing" payment system
-Then User sees "Pay via direct carrier billing" payment system was chosen
+When User choose "Pay via wallet" payment system
+Then User sees "Pay via wallet" payment system was chosen
 
 
 @GeneratorTesting
@@ -69,3 +68,4 @@ Scenario: Verify menu Services shows after user hover on menu item Uslugi
 Given User navigates to Text Generator site
 When User hovers on menu item Services
 Then Servises list opens
+
