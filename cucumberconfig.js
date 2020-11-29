@@ -21,7 +21,7 @@ exports.config = {
 
     cucumberOpts: {
         require: ['./stepDefinitions/*.ts'], // запускать это
-
+        tags: "@forTest",
         compiler: 'ts:ts-node/register',
         format: 'pretty'
     },
@@ -58,7 +58,7 @@ exports.config = {
     capabilities: {
         browserName: 'chrome',
         shardTestFiles: true,
-        maxInstances: 2,
+        maxInstances: 4,
         chromeOptions: {
             //Standard mode
             args: ["--window-size=1280,1720"]

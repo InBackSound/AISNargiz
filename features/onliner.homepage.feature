@@ -1,6 +1,7 @@
+@OnlinerHomepage @forTest
 Feature: Onliner Homepage check
 
-    @OnlinerHomepage
+    
     Scenario: Homepage is avaliable check
 
         Given I am on Onliner homepage
@@ -9,7 +10,6 @@ Feature: Onliner Homepage check
         And First news from news_teaser is avaliable
 
 
-    @OnlinerHomepage
     Scenario Outline: Homepage newssection opens
 
         Given I am on Onliner homepage

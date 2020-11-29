@@ -22,6 +22,7 @@ export class OnlinerFooterPage {
         //click on link from footer
         await browser.wait(ExpectedConditions.visibilityOf(this.onlinerElements.footerFirstItems), defaultTimeout, "Footer not loaded");
         await element(by.xpath(`//footer//li[@class='footer-style__item']//a[contains(text(), '${string}')]`)).click()
+        //console.log(`clickOnFooterLink-string: ${string}`);
     };
 
     public async verifyExpectedPageOpens(expectedtlink): Promise<void> {

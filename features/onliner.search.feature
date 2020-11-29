@@ -1,13 +1,14 @@
+    @OnlinerSearch @forTest
     Feature: Onliner Search check
 
-    @OnlinerSearch
+    
     Scenario: Goods search
 
         Given I am on Onliner homepage search
         When I enter "дед мороз" in Search field
         Then I see found first item contains "дед мороз" in name
 
-    @OnlinerSearch
+
     Scenario: Go to good's page from search
 
         Given I am on Onliner homepage search

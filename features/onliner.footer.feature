@@ -1,6 +1,6 @@
+    @OnlinerFooter @forTest
     Feature: Onliner Footer check
     
-    @OnlinerFooter
     Scenario Outline: Homepage sections footer check
 
         Given I am on Onliner homepage footer

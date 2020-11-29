@@ -137,20 +137,48 @@ export class textGeneratorPage{
     public async clickOnPaymentRadioButton(payment: string): Promise<void> {
         await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.donateIframe), defaultTimeout, "Donate IFrame not visible");
         await browser.switchTo().frame(this.generatorElements.donateIframe.getWebElement());
-        let paymentSystem = await element(by.xpath(`//input[@aria-label='${payment}']`)); //пер. варианта оплаты
+        let value:string = await '';
+        if (await payment == 'Заплатить кошельком' || await payment == 'Pay via wallet'){value = await 'PC';}
+        else if (await payment == 'Заплатить картой' || await payment == 'Pay via bank card'){value = await 'AC';}
+        else if (await payment == 'Заплатить c баланса мобильного' || await payment == 'Pay via direct carrier billing'){value = await 'MC';};
+        let paymentSystem = await element(by.xpath(`//input[@value='${value}']`)); //пер. варианта оплаты
         await paymentSystem.click();
         await browser.switchTo().defaultContent();  //выйти из iframe
+        await console.log(value);
     }
 
     public async verifyPaymentWasChosenCorrectly(expPaymentSystem: string): Promise<void> {
         await browser.switchTo().frame(this.generatorElements.donateIframe.getWebElement());
-        let paymentSystem = await element(by.xpath(`//input[@aria-label='${expPaymentSystem}']`)); //пер. варианта оплаты
+        let value:string = await '';
+        if (await expPaymentSystem == 'Заплатить кошельком' || await expPaymentSystem == 'Pay via wallet'){value = await 'PC';}
+        else if (await expPaymentSystem == 'Заплатить картой' || await expPaymentSystem == 'Pay via bank card'){value = await 'AC';}
+        else if (await expPaymentSystem == 'Заплатить c баланса мобильного' || await expPaymentSystem == 'Pay via direct carrier billing'){value = await 'MC';};
+        let paymentSystem = await element(by.xpath(`//input[@value='${value}']`)); //пер. варианта оплаты
         await paymentSystem.getAttribute('checked').then(async (checkedornot)=>{
             await expect(checkedornot).to.equal('true');  //RECHECK
         });
         await browser.switchTo().defaultContent();  //выйти из iframe
+        await console.log(value);
     }
 
+    //previous ver
+
+    // public async clickOnPaymentRadioButton(payment: string): Promise<void> {
+    //     await browser.wait(ExpectedConditions.visibilityOf(this.generatorElements.donateIframe), defaultTimeout, "Donate IFrame not visible");
+    //     await browser.switchTo().frame(this.generatorElements.donateIframe.getWebElement());
+    //     let paymentSystem = await element(by.xpath(`//input[@aria-label='${payment}']`)); //пер. варианта оплаты
+    //     await paymentSystem.click();
+    //     await browser.switchTo().defaultContent();  //выйти из iframe
+    // }
+
+    // public async verifyPaymentWasChosenCorrectly(expPaymentSystem: string): Promise<void> {
+    //     await browser.switchTo().frame(this.generatorElements.donateIframe.getWebElement());
+    //     let paymentSystem = await element(by.xpath(`//input[@aria-label='${expPaymentSystem}']`)); //пер. варианта оплаты
+    //     await paymentSystem.getAttribute('checked').then(async (checkedornot)=>{
+    //         await expect(checkedornot).to.equal('true');  //RECHECK
+    //     });
+    //     await browser.switchTo().defaultContent();  //выйти из iframe
+    // }
 
     //Cookie time
     public async clickOnAgreeCookieButton(): Promise<void> {   //надо ждать другое. потом искать этот элемент и кликать, если есть

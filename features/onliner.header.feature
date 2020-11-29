@@ -1,6 +1,7 @@
+@OnlinerHeader @forTest
 Feature: Onliner Header check
 
-    @OnlinerHeader
+    
     Scenario: Homepage sections header check fullsize
 
         Given I am on Onliner homepage header
@@ -9,7 +10,7 @@ Feature: Onliner Header check
         And Main menu is available
         And Search section is available
 
-    @OnlinerHeader
+
     Scenario: Homepage sections header check tinysize
 
         Given I am on Onliner homepage
@@ -17,7 +18,7 @@ Feature: Onliner Header check
         Then Logo on the header is avaliable
         And Hamburger is available
 
-    @OnlinerHeader
+
     Scenario Outline: Homepage sections header menu click fullsize
 
         Given I am on Onliner homepage
@@ -30,7 +31,7 @@ Feature: Onliner Header check
             | Услуги       | https://s.onliner.by/tasks    |
             | Барахолка    | https://baraholka.onliner.by/ |
 
-    @OnlinerHeader
+    
     Scenario Outline: Homepage sections header click tinysize
 
         Given I am on Onliner homepage
@@ -45,7 +46,7 @@ Feature: Onliner Header check
             | Барахолка    | https://baraholka.onliner.by/ |
 
 
-    @OnlinerHeader
+    
     Scenario Outline: Homepage sections header menu ddl check fullsize
 
         Given I am on Onliner homepage
@@ -59,7 +60,7 @@ Feature: Onliner Header check
             | Автобарахолка |
 
 
-    @OnlinerHeader
+    
     Scenario: Homepage sections header logoclick fullsize
 
         Given I am on Onliner homepage
@@ -68,7 +69,7 @@ Feature: Onliner Header check
         Then The "https://www.onliner.by/" page opens from header
 
 
-    @OnlinerHeader
+   
     Scenario: Homepage sections header logoclick tinysize
 
         Given I am on Onliner homepage

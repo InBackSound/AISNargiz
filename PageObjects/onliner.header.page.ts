@@ -91,7 +91,7 @@ export class OnlinerHeaderPage{
         //hover on main menu item
         await browser.wait(ExpectedConditions.visibilityOf(this.onlinerElements.gorizontalMenu), defaultTimeout, "Main menu not loaded");
         await browser.actions().
-            mouseMove(element(by.xpath(`//ul[@class='b-main-navigation']//span[contains(text(),'${string}')]`))).
+            mouseMove(element(by.xpath(`(//ul[@class='b-main-navigation']//span[contains(text(),'${string}')])[1]`))).
             perform();
     };
 
